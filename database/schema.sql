@@ -20,6 +20,7 @@ create index if not exists bookings_created_at_idx on public.bookings (created_a
 
 alter table public.bookings enable row level security;
 
+<<<<<<< HEAD
 -- Pengunjung hanya boleh INSERT, dan status harus 'new'.
 -- 'authenticated' ikut diizinkan: kalau admin sedang login di browser yang sama
 -- lalu mengetes form, request-nya dianggap authenticated, bukan anon.
@@ -27,6 +28,13 @@ drop policy if exists "anon can insert bookings" on public.bookings;
 create policy "anon can insert bookings"
     on public.bookings for insert
     to anon, authenticated
+=======
+-- Pengunjung (anon) hanya boleh INSERT, dan status harus 'new'.
+drop policy if exists "anon can insert bookings" on public.bookings;
+create policy "anon can insert bookings"
+    on public.bookings for insert
+    to anon
+>>>>>>> 0648a9231b93078899ff3eb80ab0d25f9da84b37
     with check (status = 'new');
 
 -- Hanya user login (admin / pemilik MUA) yang boleh baca & ubah.
