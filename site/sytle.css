@@ -1,0 +1,45 @@
+/* ===== Base ===== */
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #FBF9F7;
+    color: #3D2A1E;
+}
+h1, h2, h3, .font-serif {
+    font-family: 'Playfair Display', serif;
+}
+
+/* ===== Honeypot anti-spam: tidak terlihat oleh user, tapi bot tetap mengisi ===== */
+.hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+/* ===== Tombol submit saat loading ===== */
+button[disabled] {
+    opacity: .7;
+    cursor: not-allowed;
+}
+
+/* ===== Skeleton loading testimoni ===== */
+.skeleton {
+    background: linear-gradient(90deg, #F4ECE4 25%, #E9DCD0 50%, #F4ECE4 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.4s infinite;
+}
+@keyframes shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+}
+
+/* ===== Aksesibilitas ===== */
+:focus-visible {
+    outline: 2px solid #866953;
+    outline-offset: 2px;
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
