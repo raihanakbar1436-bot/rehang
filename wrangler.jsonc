@@ -1,0 +1,9 @@
+{
+  // Nama harus SAMA dengan nama project Workers di dashboard Cloudflare ("rehang")
+  "name": "rehang",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    // Folder berisi index.html, admin.html, dll.
+    "directory": "./site"
+  }
+}
