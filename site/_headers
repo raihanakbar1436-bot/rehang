@@ -8,3 +8,10 @@
   Cache-Control: public, max-age=3600
 /*.js
   Cache-Control: public, max-age=3600
+<<<<<<< HEAD
+
+/admin.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+=======
+>>>>>>> 0648a9231b93078899ff3eb80ab0d25f9da84b37
