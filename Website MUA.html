@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUA - Professional Make Up Artist</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nude: {
+                            50: '#FBF9F7',
+                            100: '#F4ECE4',
+                            200: '#E9DCD0',
+                            300: '#D4C2B2',
+                            400: '#B89F8B',
+                            500: '#9E826C',
+                            600: '#866953',
+                            700: '#6E523E',
+                            800: '#553E2E',
+                            900: '#3D2A1E',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FBF9F7;
+            color: #3D2A1E;
+        }
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body class="bg-[#FBF9F7] text-[#3D2A1E] antialiased selection:bg-[#B89F8B] selection:text-white">
+
+    <!-- Navbar / Header -->
+    <header class="sticky top-0 z-50 bg-[#FBF9F7]/90 backdrop-blur-md border-b border-nude-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex flex-col items-center">
+                        <span class="font-serif text-2xl tracking-[0.25em] font-bold uppercase text-[#3D2A1E]">MUA</span>
+                        <span class="text-[9px] tracking-[0.2em] uppercase text-nude-500 font-medium">Make Up Artist</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#home" class="text-nude-800 hover:text-nude-500 transition-colors">Home</a>
+                    <a href="#about" class="text-nude-800 hover:text-nude-500 transition-colors">About</a>
+                    <a href="#services" class="text-nude-800 hover:text-nude-500 transition-colors">Services</a>
+                    <a href="#portfolio" class="text-nude-800 hover:text-nude-500 transition-colors">Portfolio</a>
+                    <a href="#pricing" class="text-nude-800 hover:text-nude-500 transition-colors">Price List</a>
+                    <a href="#contact" class="text-nude-800 hover:text-nude-500 transition-colors">Contact</a>
+                </nav>
+
+                <!-- Book Now Button & Mobile Menu Toggle -->
+                <div class="flex items-center space-x-4">
+                    <a href="#contact" class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-sm font-medium rounded-full text-white bg-nude-700 hover:bg-nude-800 transition-all shadow-sm">
+                        Book Now
+                    </a>
+                    <button id="mobile-menu-button" class="md:hidden p-2 rounded-lg text-nude-800 hover:bg-nude-100 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#FBF9F7] border-b border-nude-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-nude-800 hover:bg-nude-100">Home</a>
+            <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-nude-800 hover:bg-nude-100">About</a>
+            <a href="#services" class="block px-3 py-2 rounded-md text-base font-medium text-nude-800 hover:bg-nude-100">Services</a>
+            <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-nude-800 hover:bg-nude-100">Portfolio</a>
+            <a href="#pricing" class="block px-3 py-2 rounded-md text-base font-medium text-nude-800 hover:bg-nude-100">Price List</a>
+            <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-nude-800 hover:bg-nude-100">Contact</a>
+            <div class="pt-2">
+                <a href="#contact" class="w-full text-center block px-6 py-2.5 rounded-full text-white bg-nude-700 hover:bg-nude-800 text-sm font-medium">Book Now</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-nude-100 overflow-hidden py-16 lg:py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Left Text Content -->
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="inline-block text-xs uppercase tracking-[0.3em] font-semibold text-nude-600 bg-nude-200/60 px-3 py-1 rounded-full">
+                        Professional Make Up Artist
+                    </span>
+                    <h1 class="text-4xl sm:text-6xl font-serif font-bold text-nude-900 leading-[1.15]">
+                        Bring Out <br/><span class="italic font-normal">Your Best Version</span>
+                    </h1>
+                    <p class="text-nude-700 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+                        Tampil percaya diri di setiap momen spesialmu dengan sentuhan makeup yang tepat, elegan, dan menonjolkan kecantikan alami terbaikmu.
+                    </p>
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="#contact" class="px-8 py-3.5 bg-nude-700 hover:bg-nude-800 text-white rounded-full font-medium text-sm transition-all shadow-md hover:shadow-lg">
+                            Book Now
+                        </a>
+                        <a href="#portfolio" class="px-8 py-3.5 bg-transparent border border-nude-400 hover:border-nude-700 text-nude-800 rounded-full font-medium text-sm transition-all">
+                            Lihat Portfolio
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Slider Banner Image -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/5] bg-nude-200">
+                        <!-- Slider Images -->
+                        <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-100">
+                            <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1000&auto=format&fit=crop" alt="MUA Model 1" class="w-full h-full object-cover">
+                        </div>
+                        <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                            <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?q=80&w=1000&auto=format&fit=crop" alt="MUA Model 2" class="w-full h-full object-cover">
+                        </div>
+                        <div class="hero-slide absolute inset-0 transition-opacity duration-700 opacity-0">
+                            <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1000&auto=format&fit=crop" alt="MUA Model 3" class="w-full h-full object-cover">
+                        </div>
+
+                        <!-- Slider Controls Overlay -->
+                        <div class="absolute bottom-6 right-6 flex items-center space-x-4 bg-black/30 backdrop-blur-md px-4 py-2 rounded-full text-white">
+                            <div class="flex space-x-2 text-xs font-semibold" id="slide-indicators">
+                                <span class="cursor-pointer opacity-100" onclick="currentSlide(0)">01</span>
+                                <span class="cursor-pointer opacity-60" onclick="currentSlide(1)">02</span>
+                                <span class="cursor-pointer opacity-60" onclick="currentSlide(2)">03</span>
+                            </div>
+                            <div class="flex space-x-2 ml-2">
+                                <button onclick="prevSlide()" class="hover:text-nude-200 focus:outline-none"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                                <button onclick="nextSlide()" class="hover:text-nude-200 focus:outline-none"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Saya Section -->
+    <section id="about" class="py-20 bg-[#FBF9F7] relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Text & Features -->
+                <div class="lg:col-span-7 space-y-8">
+                    <div>
+                        <span class="text-xs uppercase tracking-[0.25em] font-semibold text-nude-600">Tentang Saya</span>
+                        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-nude-900 mt-2">
+                            Hello, I'm <span class="italic text-nude-700">Alya Annisa</span>
+                        </h2>
+                    </div>
+                    <p class="text-nude-700 leading-relaxed font-light">
+                        Saya adalah seorang Make Up Artist dengan pengalaman lebih dari 2 tahun dalam dunia kecantikan. Saya percaya bahwa setiap orang memiliki kecantikan unik yang layak untuk ditampilkan. Dengan teknik yang tepat dan produk berkualitas, saya berusaha memberikan hasil makeup yang natural, flawless, dan sesuai dengan karakter kamu.
+                    </p>
+
+                    <!-- Features List -->
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start space-x-4 p-4 rounded-2xl bg-nude-100/60 border border-nude-200/50">
+                            <div class="w-10 h-10 rounded-full bg-nude-300/50 flex items-center justify-center text-nude-800 flex-shrink-0">
+                                <i class="fa-solid fa-award text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-nude-900">Profesional & Berpengalaman</h4>
+                                <p class="text-sm text-nude-600 font-light mt-0.5">Menangani ratusan klien untuk berbagai acara formal maupun kasual.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 p-4 rounded-2xl bg-nude-100/60 border border-nude-200/50">
+                            <div class="w-10 h-10 rounded-full bg-nude-300/50 flex items-center justify-center text-nude-800 flex-shrink-0">
+                                <i class="fa-solid fa-gem text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-nude-900">Menggunakan Produk Berkualitas</h4>
+                                <p class="text-sm text-nude-600 font-light mt-0.5">Brand high-end lokal dan internasional yang aman untuk semua jenis kulit.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-4 p-4 rounded-2xl bg-nude-100/60 border border-nude-200/50">
+                            <div class="w-10 h-10 rounded-full bg-nude-300/50 flex items-center justify-center text-nude-800 flex-shrink-0">
+                                <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-nude-900">Hasil Makeup Natural & Tahan Lama</h4>
+                                <p class="text-sm text-nude-600 font-light mt-0.5">Teknik makeup tahan seharian tanpa terasa berat di wajah.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MUA Signature -->
+                    <div class="pt-2">
+                        <span class="font-serif italic text-2xl text-nude-800 font-semibold tracking-wide">Alya Annisa MUA</span>
+                    </div>
+                </div>
+
+                <!-- Image Frame -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -inset-4 bg-nude-200 rounded-[2.5rem] transform rotate-3"></div>
+                        <div class="relative rounded-3xl overflow-hidden shadow-xl aspect-[3/4] bg-nude-300">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000&auto=format&fit=crop" alt="Bella Putri MUA" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Layanan Kami Section -->
+    <section id="services" class="py-20 bg-nude-100/70 border-y border-nude-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs uppercase tracking-[0.25em] font-semibold text-nude-600">Layanan Kami</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-nude-900 mt-2">Our Services</h2>
+                <p class="text-nude-700 text-sm sm:text-base font-light mt-3">Layanan makeup profesional untuk berbagai kebutuhan spesialmu.</p>
+            </div>
+
+            <!-- Services Grid (6 Cards) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-[#FBF9F7] p-8 rounded-3xl shadow-sm hover:shadow-md transition-all border border-nude-200/60 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-nude-200 flex items-center justify-center text-nude-800 text-xl mb-6 group-hover:bg-nude-700 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-ring"></i>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-nude-900 mb-2">Wedding Make Up</h3>
+                        <p class="text-nude-600 text-sm font-light leading-relaxed">
+                            Tampil memukau di hari pernikahanmu, dengan makeup yang elegan dan tahan lama seharian.
+                        </p>
+                    </div>
+                    <div class="pt-6">
+                        <a href="#contact" class="inline-flex items-center text-sm font-semibold text-nude-800 hover:text-nude-600">
+                            Detail <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-[#FBF9F7] p-8 rounded-3xl shadow-sm hover:shadow-md transition-all border border-nude-200/60 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-nude-200 flex items-center justify-center text-nude-800 text-xl mb-6 group-hover:bg-nude-700 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-nude-900 mb-2">Engagement Make Up</h3>
+                        <p class="text-nude-600 text-sm font-light leading-relaxed">
+                            Makeup yang natural dan mempercantik momen lamaranmu agar terlihat istimewa.
+                        </p>
+                    </div>
+                    <div class="pt-6">
+                        <a href="#contact" class="inline-flex items-center text-sm font-semibold text-nude-800 hover:text-nude-600">
+                            Detail <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-[#FBF9F7] p-8 rounded-3xl shadow-sm hover:shadow-md transition-all border border-nude-200/60 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-nude-200 flex items-center justify-center text-nude-800 text-xl mb-6 group-hover:bg-nude-700 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-camera-retro"></i>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-nude-900 mb-2">Prewedding Make Up</h3>
+                        <p class="text-nude-600 text-sm font-light leading-relaxed">
+                            Menyempurnakan konsep foto prewedding dengan look yang sesuai karaktermu di depan lensa.
+                        </p>
+                    </div>
+                    <div class="pt-6">
+                        <a href="#contact" class="inline-flex items-center text-sm font-semibold text-nude-800 hover:text-nude-600">
+                            Detail <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-[#FBF9F7] p-8 rounded-3xl shadow-sm hover:shadow-md transition-all border border-nude-200/60 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-nude-200 flex items-center justify-center text-nude-800 text-xl mb-6 group-hover:bg-nude-700 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-champagne-glasses"></i>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-nude-900 mb-2">Party & Event Make Up</h3>
+                        <p class="text-nude-600 text-sm font-light leading-relaxed">
+                            Tampil fresh dan glowing untuk berbagai acara pesta, gala dinner, maupun event spesial.
+                        </p>
+                    </div>
+                    <div class="pt-6">
+                        <a href="#contact" class="inline-flex items-center text-sm font-semibold text-nude-800 hover:text-nude-600">
+                            Detail <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-[#FBF9F7] p-8 rounded-3xl shadow-sm hover:shadow-md transition-all border border-nude-200/60 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-nude-200 flex items-center justify-center text-nude-800 text-xl mb-6 group-hover:bg-nude-700 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-nude-900 mb-2">Graduation Make Up</h3>
+                        <p class="text-nude-600 text-sm font-light leading-relaxed">
+                            Makeup yang simpel, namun tetap elegan untuk hari kelulusanmu yang membanggakan.
+                        </p>
+                    </div>
+                    <div class="pt-6">
+                        <a href="#contact" class="inline-flex items-center text-sm font-semibold text-nude-800 hover:text-nude-600">
+                            Detail <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-[#FBF9F7] p-8 rounded-3xl shadow-sm hover:shadow-md transition-all border border-nude-200/60 flex flex-col justify-between group">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-nude-200 flex items-center justify-center text-nude-800 text-xl mb-6 group-hover:bg-nude-700 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-wand-magic"></i>
+                        </div>
+                        <h3 class="text-xl font-serif font-bold text-nude-900 mb-2">Custom Makeup</h3>
+                        <p class="text-nude-600 text-sm font-light leading-relaxed">
+                            Layanan makeup dengan penyesuaian khusus sesuai permintaan dan tema acaramu.
+                        </p>
+                    </div>
+                    <div class="pt-6">
+                        <a href="#contact" class="inline-flex items-center text-sm font-semibold text-nude-800 hover:text-nude-600">
+                            Detail <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-[#FBF9F7]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] font-semibold text-nude-600">Portfolio</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-nude-900 mt-2">Karya Terbaik Kami</h2>
+                    <p class="text-nude-700 text-sm sm:text-base font-light mt-1">Berbagai hasil makeup untuk momen spesialmu.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <button onclick="filterPortfolio('all')" class="portfolio-filter px-5 py-2 rounded-full text-sm font-medium bg-nude-700 text-white transition-all shadow-sm mr-2 mb-2">Semua</button>
+                    <button onclick="filterPortfolio('wedding')" class="portfolio-filter px-5 py-2 rounded-full text-sm font-medium bg-nude-200 hover:bg-nude-300 text-nude-800 transition-all mr-2 mb-2">Wedding</button>
+                    <button onclick="filterPortfolio('prewedding')" class="portfolio-filter px-5 py-2 rounded-full text-sm font-medium bg-nude-200 hover:bg-nude-300 text-nude-800 transition-all mr-2 mb-2">Prewedding</button>
+                    <button onclick="filterPortfolio('engagement')" class="portfolio-filter px-5 py-2 rounded-full text-sm font-medium bg-nude-200 hover:bg-nude-300 text-nude-800 transition-all mr-2 mb-2">Engagement</button>
+                </div>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6">
+                <!-- Item 1 -->
+                <div class="portfolio-item group relative rounded-2xl overflow-hidden aspect-[3/4] bg-nude-200 shadow-sm" data-category="wedding">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop" alt="Wedding" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 text-white">
+                        <span class="text-xs uppercase tracking-wider text-nude-200 font-semibold">Wedding</span>
+                        <h4 class="font-serif font-medium text-sm">Classic Bridal Look</h4>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="portfolio-item group relative rounded-2xl overflow-hidden aspect-[3/4] bg-nude-200 shadow-sm" data-category="prewedding">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=600&auto=format&fit=crop" alt="Prewedding" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 text-white">
+                        <span class="text-xs uppercase tracking-wider text-nude-200 font-semibold">Prewedding</span>
+                        <h4 class="font-serif font-medium text-sm">Outdoor Glow</h4>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="portfolio-item group relative rounded-2xl overflow-hidden aspect-[3/4] bg-nude-200 shadow-sm" data-category="engagement">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=600&auto=format&fit=crop" alt="Engagement" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 text-white">
+                        <span class="text-xs uppercase tracking-wider text-nude-200 font-semibold">Engagement</span>
+                        <h4 class="font-serif font-medium text-sm">Soft Romantic</h4>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="portfolio-item group relative rounded-2xl overflow-hidden aspect-[3/4] bg-nude-200 shadow-sm" data-category="party">
+                    <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?q=80&w=600&auto=format&fit=crop" alt="Party" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 text-white">
+                        <span class="text-xs uppercase tracking-wider text-nude-200 font-semibold">Party</span>
+                        <h4 class="font-serif font-medium text-sm">Glam Evening</h4>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="portfolio-item group relative rounded-2xl overflow-hidden aspect-[3/4] bg-nude-200 shadow-sm" data-category="graduation">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=600&auto=format&fit=crop" alt="Graduation" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 text-white">
+                        <span class="text-xs uppercase tracking-wider text-nude-200 font-semibold">Graduation</span>
+                        <h4 class="font-serif font-medium text-sm">Fresh Graduate</h4>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="portfolio-item group relative rounded-2xl overflow-hidden aspect-[3/4] bg-nude-200 shadow-sm" data-category="custom">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop" alt="Custom" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4 text-white">
+                        <span class="text-xs uppercase tracking-wider text-nude-200 font-semibold">Custom</span>
+                        <h4 class="font-serif font-medium text-sm">Editorial Concept</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Price List Section -->
+    <section id="pricing" class="py-20 bg-nude-100/70 border-y border-nude-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] font-semibold text-nude-600">Harga</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-nude-900 mt-2">Price List</h2>
+                    <p class="text-nude-700 text-sm sm:text-base font-light mt-1">Paket makeup lengkap dengan harga yang transparan.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="#contact" class="inline-flex items-center px-6 py-3 rounded-full bg-nude-700 text-white font-medium text-sm hover:bg-nude-800 transition-all shadow-sm">
+                        Lihat Semua Paket
+                    </a>
+                </div>
+            </div>
+
+            <!-- Price Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-[#FBF9F7] rounded-3xl p-8 border border-nude-200/80 shadow-sm flex flex-col justify-between relative hover:border-nude-400 transition-all">
+                    <div>
+                        <h3 class="text-xl font-serif font-bold text-nude-900 mb-1">Make Up Wisuda</h3>
+                        <div class="text-nude-700 font-bold text-2xl my-4">Rp 600.000 <span class="text-xs font-normal text-nude-500">- 1.000.000</span></div>
+                        <ul class="space-y-3 text-sm text-nude-700 font-light pt-2 border-t border-nude-200">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-600 mr-2 text-xs"></i> Makeup + Hairdo / Hijabdo</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-600 mr-2 text-xs"></i> 1x Make Up Look</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-600 mr-2 text-xs"></i> Durasi 2-3 jam</li>
+                        </ul>
+                    </div>
+                    <div class="pt-8">
+                        <a href="#contact" class="w-full block text-center py-3 rounded-full border border-nude-700 text-nude-800 font-medium text-sm hover:bg-nude-700 hover:text-white transition-all">Pilih Paket</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-[#FBF9F7] rounded-3xl p-8 border border-nude-200/80 shadow-sm flex flex-col justify-between relative hover:border-nude-400 transition-all">
+                    <div>
+                        <h3 class="text-xl font-serif font-bold text-nude-900 mb-1">Make Up Party/Acara</h3>
+                        <div class="text-nude-700 font-bold text-2xl my-4">Rp 800.000 <span class="text-xs font-normal text-nude-500">- 1.200.000</span></div>
+                        <ul class="space-y-3 text-sm text-nude-700 font-light pt-2 border-t border-nude-200">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-600 mr-2 text-xs"></i> Makeup + Hairdo / Hijabdo</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-600 mr-2 text-xs"></i> 1x Make Up Look</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-600 mr-2 text-xs"></i> Durasi 2-3 jam</li>
+                        </ul>
+                    </div>
+                    <div class="pt-8">
+                        <a href="#contact" class="w-full block text-center py-3 rounded-full border border-nude-700 text-nude-800 font-medium text-sm hover:bg-nude-700 hover:text-white transition-all">Pilih Paket</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-nude-800 text-white rounded-3xl p-8 border border-nude-900 shadow-lg flex flex-col justify-between relative">
+                    <div class="absolute -top-3 right-6 bg-nude-200 text-nude-900 text-xs uppercase px-3 py-1 rounded-full font-bold tracking-wider">Favorit</div>
+                    <div>
+                        <h3 class="text-xl font-serif font-bold mb-1">Make Up Prewedding</h3>
+                        <div class="font-bold text-2xl my-4 text-nude-100">Rp 1.500.000 <span class="text-xs font-normal text-nude-300">- 2.500.000</span></div>
+                        <ul class="space-y-3 text-sm text-nude-200 font-light pt-2 border-t border-nude-700">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-300 mr-2 text-xs"></i> Makeup + Hairdo</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-300 mr-2 text-xs"></i> 2x Make Up Look / Touchup</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-300 mr-2 text-xs"></i> Durasi 5-6 jam</li>
+                        </ul>
+                    </div>
+                    <div class="pt-8">
+                        <a href="#contact" class="w-full block text-center py-3 rounded-full bg-nude-200 text-nude-900 font-medium text-sm hover:bg-white transition-all">Pilih Paket</a>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-[#FBF9F7] rounded-3xl p-8 border border-nude-200/80 shadow-sm flex flex-col justify-between relative hover:border-nude-400 transition-all">
+                    <div>
+                        <h3 class="text-xl font-serif font-bold text-nude-900 mb-1">Custom Package</h3>
+                        <div class="text-nude-700 font-bold text-xl my-4">Mulai dari Rp 500.000</div>
+                        <ul class="space-y-3 text-sm text-nude-700 font-light pt-2 border-t border-nude-200">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-600 mr-2 text-xs"></i> Sesuai kebutuhan klien</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-600 mr-2 text-xs"></i> Bisa request konsep</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-nude-600 mr-2 text-xs"></i> Hubungi untuk detail</li>
+                        </ul>
+                    </div>
+                    <div class="pt-8">
+                        <a href="#contact" class="w-full block text-center py-3 rounded-full border border-nude-700 text-nude-800 font-medium text-sm hover:bg-nude-700 hover:text-white transition-all">Konsultasi</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimoni Section -->
+    <section class="py-20 bg-[#FBF9F7] overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <span class="text-xs uppercase tracking-[0.25em] font-semibold text-nude-600">Testimoni</span>
+                    <h2 class="text-3xl sm:text-4xl font-serif font-bold text-nude-900 mt-2">Apa Kata Mereka?</h2>
+                    <p class="text-nude-700 text-sm sm:text-base font-light mt-1">Keluasan kamu adalah prioritas kami.</p>
+                </div>
+                <div class="flex space-x-2">
+                    <button onclick="prevTestimonial()" class="w-10 h-10 rounded-full border border-nude-300 flex items-center justify-center text-nude-800 hover:bg-nude-200 transition-all"><i class="fa-solid fa-chevron-left text-xs"></i></button>
+                    <button onclick="nextTestimonial()" class="w-10 h-10 rounded-full border border-nude-300 flex items-center justify-center text-nude-800 hover:bg-nude-200 transition-all"><i class="fa-solid fa-chevron-right text-xs"></i></button>
+                </div>
+            </div>
+
+            <!-- Testimonial Slider Track -->
+            <div class="relative overflow-hidden">
+                <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out space-x-6">
+                    <!-- Testimonial 1 -->
+                    <div class="min-w-full md:min-w-[calc(50%-12px)] bg-nude-100/60 p-8 rounded-3xl border border-nude-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center space-x-4 mb-4">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" alt="Aulia Rahma" class="w-12 h-12 rounded-full object-cover">
+                                <div>
+                                    <h4 class="font-bold text-nude-900 text-sm">Aulia Rahma</h4>
+                                    <span class="text-xs text-nude-600 font-light">Wedding Make Up</span>
+                                </div>
+                            </div>
+                            <p class="text-nude-700 text-sm font-light italic leading-relaxed">
+                                "Makeup-nya flawless banget! Aku jadi sangat percaya diri di hari pernikahanku. Terima kasih banyak!"
+                            </p>
+                        </div>
+                        <div class="flex text-amber-500 text-xs mt-6 space-x-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="min-w-full md:min-w-[calc(50%-12px)] bg-nude-100/60 p-8 rounded-3xl border border-nude-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center space-x-4 mb-4">
+                                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop" alt="Salsabila Putri" class="w-12 h-12 rounded-full object-cover">
+                                <div>
+                                    <h4 class="font-bold text-nude-900 text-sm">Salsabila Putri</h4>
+                                    <span class="text-xs text-nude-600 font-light">Prewedding Make Up</span>
+                                </div>
+                            </div>
+                            <p class="text-nude-700 text-sm font-light italic leading-relaxed">
+                                "Hasil makeup-nya natural dan tahan lama. Timnya juga ramah dan profesional. Highly recommended!"
+                            </p>
+                        </div>
+                        <div class="flex text-amber-500 text-xs mt-6 space-x-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="min-w-full md:min-w-[calc(50%-12px)] bg-nude-100/60 p-8 rounded-3xl border border-nude-200 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center space-x-4 mb-4">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" alt="Nodya Fitri" class="w-12 h-12 rounded-full object-cover">
+                                <div>
+                                    <h4 class="font-bold text-nude-900 text-sm">Nodya Fitri</h4>
+                                    <span class="text-xs text-nude-600 font-light">Engagement Make Up</span>
+                                </div>
+                            </div>
+                            <p class="text-nude-700 text-sm font-light italic leading-relaxed">
+                                "Sangat puas dengan hasilnya! Detailnya rapi dan sesuai dengan keinginan aku."
+                            </p>
+                        </div>
+                        <div class="flex text-amber-500 text-xs mt-6 space-x-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hubungi Kami Section -->
+    <section id="contact" class="py-20 bg-nude-100/70 border-t border-nude-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12">
+                <span class="text-xs uppercase tracking-[0.25em] font-semibold text-nude-600">Hubungi Kami</span>
+                <h2 class="text-3xl sm:text-4xl font-serif font-bold text-nude-900 mt-2">Get In Touch</h2>
+                <p class="text-nude-700 text-sm sm:text-base font-light mt-1">Jangan ragu untuk menghubungi kami jika ada pertanyaan atau ingin booking jadwal.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Info Kontak & Mini Map -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="bg-[#FBF9F7] p-8 rounded-3xl border border-nude-200 space-y-6 shadow-sm">
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-nude-200 flex items-center justify-center text-nude-800 flex-shrink-0 mt-1">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-nude-900 text-sm">WhatsApp</h4>
+                                <p class="text-sm text-nude-600 font-light">+62 83125830768 (Fast Response)</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-nude-200 flex items-center justify-center text-nude-800 flex-shrink-0 mt-1">
+                                <i class="fa-brands fa-instagram text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-nude-900 text-sm">Instagram</h4>
+                                <p class="text-sm text-nude-600 font-light">@makeupbyalysaa</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-nude-200 flex items-center justify-center text-nude-800 flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-envelope text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-nude-900 text-sm">Email</h4>
+                                <p class="text-sm text-nude-600 font-light">raihanakbar1436@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start space-x-4">
+                            <div class="w-10 h-10 rounded-full bg-nude-200 flex items-center justify-center text-nude-800 flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-location-dot text-lg"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-nude-900 text-sm">Lokasi</h4>
+                                <p class="text-sm text-nude-600 font-light">Pontianak (Pontianak - Kubu Raya)</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mini Map Box -->
+                    <div class="bg-[#FBF9F7] p-4 rounded-3xl border border-nude-200 overflow-hidden shadow-sm">
+                        <div class="relative w-full h-48 rounded-2xl bg-nude-200 overflow-hidden flex items-center justify-center">
+                            <div class="absolute inset-0 opacity-40 bg-[radial-gradient(#866953_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                            <div class="relative z-10 text-center p-4">
+                                <i class="fa-solid fa-map-location-dot text-3xl text-nude-800 mb-2"></i>
+                                <p class="text-xs font-semibold text-nude-900">Jl. Tabrani Ahmad Komp. Griya Taman Anggrek 3 No.B2</p>
+                                <span class="text-[10px] text-nude-600 underline cursor-pointer">Lihat Lokasi di Google Maps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Kontak Interaktif -->
+                <div class="lg:col-span-7">
+                    <form id="booking-form" onsubmit="handleFormSubmit(event)" class="bg-[#FBF9F7] p-8 sm:p-10 rounded-3xl border border-nude-200 space-y-6 shadow-sm">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-nude-700 mb-2">Nama Lengkap</label>
+                                <input type="text" required placeholder="Masukkan nama..." class="w-full px-4 py-3 rounded-xl bg-nude-50 border border-nude-300 focus:outline-none focus:border-nude-700 text-sm text-nude-900">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold uppercase tracking-wider text-nude-700 mb-2">Email / WhatsApp</label>
+                                <input type="text" required placeholder="No. Telp atau Email..." class="w-full px-4 py-3 rounded-xl bg-nude-50 border border-nude-300 focus:outline-none focus:border-nude-700 text-sm text-nude-900">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-nude-700 mb-2">Pilih Layanan</label>
+                            <select class="w-full px-4 py-3 rounded-xl bg-nude-50 border border-nude-300 focus:outline-none focus:border-nude-700 text-sm text-nude-900">
+                                <option>Wedding Make Up</option>
+                                <option>Engagement Make Up</option>
+                                <option>Prewedding Make Up</option>
+                                <option>Party & Event Make Up</option>
+                                <option>Graduation Make Up</option>
+                                <option>Custom Makeup</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-nude-700 mb-2">Pesan / Kebutuhan</label>
+                            <textarea rows="4" placeholder="Tuliskan tanggal acara dan detail request makeup kamu..." class="w-full px-4 py-3 rounded-xl bg-nude-50 border border-nude-300 focus:outline-none focus:border-nude-700 text-sm text-nude-900"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-full bg-nude-700 hover:bg-nude-800 text-white font-medium text-sm transition-all shadow-md">
+                            Kirim Pesan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-nude-900 text-nude-200 py-16 border-t border-nude-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center pb-12 border-b border-nude-800 gap-8">
+                <!-- Brand Footer -->
+                <div class="text-center md:text-left">
+                    <span class="font-serif text-3xl tracking-[0.25em] font-bold uppercase text-white">MUA</span>
+                    <p class="text-sm text-nude-400 font-light mt-2 max-w-sm">
+                        Cantik bukan hanya tentang penampilan, tapi tentang rasa percaya diri.
+                    </p>
+                </div>
+
+                <!-- Social Links -->
+                <div class="flex space-x-6 text-xl">
+                    <a href="#" class="w-10 h-10 rounded-full bg-nude-800 flex items-center justify-center hover:bg-nude-700 text-white transition-all"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-nude-800 flex items-center justify-center hover:bg-nude-700 text-white transition-all"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-nude-800 flex items-center justify-center hover:bg-nude-700 text-white transition-all"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="pt-8 text-center text-xs text-nude-400 font-light">
+                &copy; 2026 MUA. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Notification Modal (Replacement for alert) -->
+    <div id="notification-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden">
+        <div class="bg-[#FBF9F7] p-8 rounded-3xl max-w-sm w-full mx-4 shadow-2xl text-center space-y-4 border border-nude-200">
+            <div class="w-14 h-14 rounded-full bg-nude-200 text-nude-800 flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="font-serif font-bold text-xl text-nude-900">Pesan Terkirim!</h3>
+            <p id="modal-message" class="text-sm text-nude-600 font-light">Terima kasih telah menghubungi kami. Kami akan segera merespons pesanmu.</p>
+            <button onclick="closeModal()" class="w-full py-2.5 rounded-full bg-nude-700 text-white font-medium text-sm hover:bg-nude-800 transition-all">Tutup</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hero Slider Logic
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const indicators = document.querySelectorAll('#slide-indicators span');
+
+        function showSlide(n) {
+            slides.forEach((slide, index) => {
+                slide.style.opacity = index === n ? '1' : '0';
+                indicators[index].style.opacity = index === n ? '1' : '0.6';
+            });
+        }
+
+        function nextSlide() {
+            slideIndex = (slideIndex + 1) % slides.length;
+            showSlide(slideIndex);
+        }
+
+        function prevSlide() {
+            slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+            showSlide(slideIndex);
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+
+        // Auto slide every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        // Portfolio Filtering
+        function filterPortfolio(category) {
+            const items = document.querySelectorAll('.portfolio-item');
+            const buttons = document.querySelectorAll('.portfolio-filter');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-nude-700', 'text-white');
+                btn.classList.add('bg-nude-200', 'text-nude-800');
+            });
+            event.target.classList.remove('bg-nude-200', 'text-nude-800');
+            event.target.classList.add('bg-nude-700', 'text-white');
+
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Testimonial Carousel Simple Logic
+        let testimonialIndex = 0;
+        const testimonialTrack = document.getElementById('testimonial-track');
+
+        function nextTestimonial() {
+            testimonialIndex = (testimonialIndex + 1) % 3;
+            testimonialTrack.style.transform = `translateX(-${testimonialIndex * 50}%)`;
+        }
+
+        function prevTestimonial() {
+            testimonialIndex = (testimonialIndex - 1 + 3) % 3;
+            testimonialTrack.style.transform = `translateX(-${testimonialIndex * 50}%)`;
+        }
+
+        // Form Submit Handler
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const modal = document.getElementById('notification-modal');
+            modal.classList.remove('hidden');
+            e.target.reset();
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('notification-modal');
+            modal.classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
