@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin - MUA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: { extend: {
+                colors: { nude: {
+                    50:'#FBF9F7',100:'#F4ECE4',200:'#E9DCD0',300:'#D4C2B2',400:'#B89F8B',
+                    500:'#9E826C',600:'#866953',700:'#6E523E',800:'#553E2E',900:'#3D2A1E' } },
+                fontFamily: { sans:['"Plus Jakarta Sans"','sans-serif'], serif:['"Playfair Display"','serif'] }
+            } }
+        }
+    </script>
+    <link rel="stylesheet" href="sytle.css">
+</head>
+<body class="bg-nude-50 text-nude-900 antialiased min-h-screen">
+
+    <!-- Config belum diisi -->
+    <div id="config-error" class="hidden max-w-md mx-auto mt-24 p-8 bg-white rounded-3xl border border-nude-200 text-center">
+        <h1 class="font-serif text-xl font-bold mb-2">Supabase belum dikonfigurasi</h1>
+        <p class="text-sm text-nude-600">Isi <code>SUPABASE_URL</code> dan <code>SUPABASE_ANON_KEY</code> di <code>config.js</code>.</p>
+    </div>
+
+    <!-- LOGIN -->
+    <main id="login-view" class="max-w-md mx-auto px-4 pt-24">
+        <div class="text-center mb-8">
+            <span class="font-serif text-3xl tracking-[0.25em] font-bold uppercase">MUA</span>
+            <p class="text-[10px] tracking-[0.2em] uppercase text-nude-500 mt-1">Admin Panel</p>
+        </div>
+        <form id="login-form" class="bg-white p-8 rounded-3xl border border-nude-200 shadow-sm space-y-5">
+            <div>
+                <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-nude-700 mb-2">Email</label>
+                <input id="email" type="email" required autocomplete="username"
+                       class="w-full px-4 py-3 rounded-xl bg-nude-50 border border-nude-300 focus:outline-none focus:border-nude-700 text-sm">
+            </div>
+            <div>
+                <label for="password" class="block text-xs font-semibold uppercase tracking-wider text-nude-700 mb-2">Password</label>
+                <input id="password" type="password" required autocomplete="current-password"
+                       class="w-full px-4 py-3 rounded-xl bg-nude-50 border border-nude-300 focus:outline-none focus:border-nude-700 text-sm">
+            </div>
+            <p id="login-error" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-3"></p>
+            <button id="login-btn" type="submit"
+                    class="w-full py-3.5 rounded-full bg-nude-700 hover:bg-nude-800 text-white font-medium text-sm transition-all shadow-md">Masuk</button>
+        </form>
+        <p class="text-center mt-6"><a href="index.html" class="text-xs text-nude-600 underline">&larr; Kembali ke website</a></p>
+    </main>
+
+    <!-- ADMIN -->
+    <div id="admin-view" class="hidden">
+        <header class="sticky top-0 z-40 bg-nude-50/90 backdrop-blur-md border-b border-nude-200">
+            <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+                <span class="font-serif text-xl tracking-[0.25em] font-bold uppercase">MUA <span class="text-[10px] tracking-widest text-nude-500 font-sans">Admin</span></span>
+                <div class="flex items-center gap-3 text-sm">
+                    <span id="admin-email" class="hidden sm:inline text-nude-600 text-xs"></span>
+                    <a href="index.html" target="_blank" rel="noopener" class="text-nude-700 underline text-xs">Lihat website</a>
+                    <button id="logout-btn" class="px-4 py-2 rounded-full border border-nude-400 text-xs hover:bg-nude-100">Keluar</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-6xl mx-auto px-4 py-10">
+            <h1 class="font-serif text-3xl font-bold mb-6">Dashboard</h1>
+
+            <div class="flex flex-wrap gap-2 mb-8">
+                <button data-tab="bookings" class="px-5 py-2 rounded-full text-sm font-medium bg-nude-700 text-white transition-all">
+                    Booking <span id="new-badge" class="hidden ml-1 px-2 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-bold align-middle"></span>
+                </button>
+                <button data-tab="images" class="px-5 py-2 rounded-full text-sm font-medium bg-nude-200 text-nude-800 hover:bg-nude-300 transition-all">Foto Website</button>
+                <button data-tab="testi" class="px-5 py-2 rounded-full text-sm font-medium bg-nude-200 text-nude-800 hover:bg-nude-300 transition-all">Foto Testimoni</button>
+            </div>
+
+            <!-- BOOKING -->
+            <section id="tab-bookings">
+                <div class="flex flex-col sm:flex-row gap-3 sm:items-center justify-between mb-5">
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <select id="bk-filter" class="px-4 py-2 rounded-full bg-white border border-nude-300 text-sm focus:outline-none focus:border-nude-700">
+                            <option value="all">Semua status</option>
+                            <option value="new">Baru</option>
+                            <option value="contacted">Sudah dihubungi</option>
+                            <option value="booked">Booked</option>
+                            <option value="done">Selesai</option>
+                            <option value="cancelled">Dibatalkan</option>
+                        </select>
+                        <input id="bk-search" type="search" placeholder="Cari nama / kontak..." class="px-4 py-2 rounded-full bg-white border border-nude-300 text-sm focus:outline-none focus:border-nude-700 w-56">
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span id="bk-count" class="text-xs text-nude-600"></span>
+                        <button id="bk-refresh" class="px-4 py-2 rounded-full border border-nude-400 text-xs hover:bg-nude-100">Muat ulang</button>
+                    </div>
+                </div>
+                <div id="bk-list" class="space-y-4"></div>
+            </section>
+
+            <!-- FOTO WEBSITE -->
+            <section id="tab-images" class="hidden">
+                <p class="text-sm text-nude-600 font-light mb-6">Foto otomatis dikecilkan &amp; dikompres sebelum diunggah. Format: JPG, PNG, WebP.</p>
+                <div id="slots" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5"></div>
+            </section>
+
+            <!-- FOTO TESTIMONI -->
+            <section id="tab-testi" class="hidden">
+                <p class="text-sm text-nude-600 font-light mb-6">Ganti foto profil pemberi testimoni.</p>
+                <div id="testi-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="hidden"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="config.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
