@@ -18,6 +18,9 @@ const db = supabaseReady
 if (!db) console.warn("[MUA] Supabase belum dikonfigurasi di config.js - form & testimoni dinamis nonaktif.");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4ceb6f08dacc14f00fab1f07dcd938f2d164e1a0
 /* ---------- Foto dinamis dari Supabase (diatur lewat admin.html) ---------- */
 async function loadSiteImages() {
     if (!db) return; // tetap pakai foto bawaan di HTML
@@ -34,8 +37,11 @@ async function loadSiteImages() {
 }
 loadSiteImages();
 
+<<<<<<< HEAD
 =======
 >>>>>>> 0648a9231b93078899ff3eb80ab0d25f9da84b37
+=======
+>>>>>>> 4ceb6f08dacc14f00fab1f07dcd938f2d164e1a0
 /* ---------- Mobile menu ---------- */
 const mobileMenuButton = document.getElementById("mobile-menu-button");
 const mobileMenu = document.getElementById("mobile-menu");
@@ -217,11 +223,16 @@ async function handleFormSubmit(e) {
 
     // honeypot: bot mengisi, manusia tidak. Pura-pura sukses.
 <<<<<<< HEAD
+<<<<<<< HEAD
     if (document.getElementById("f-hp").value) {
         console.warn("[MUA] Honeypot terisi - pesan tidak dikirim.");
 =======
     if (document.getElementById("f-website").value) {
 >>>>>>> 0648a9231b93078899ff3eb80ab0d25f9da84b37
+=======
+    if (document.getElementById("f-hp").value) {
+        console.warn("[MUA] Honeypot terisi - pesan tidak dikirim.");
+>>>>>>> 4ceb6f08dacc14f00fab1f07dcd938f2d164e1a0
         form.reset();
         showModal({ title: "Pesan Terkirim!", message: "Terima kasih telah menghubungi kami." });
         return;
