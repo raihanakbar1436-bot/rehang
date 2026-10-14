@@ -71,32 +71,42 @@
 
             <div class="flex flex-wrap gap-2 mb-8">
                 <button data-tab="bookings" class="px-5 py-2 rounded-full text-sm font-medium bg-nude-700 text-white transition-all">
-                    Booking <span id="new-badge" class="hidden ml-1 px-2 py-0.5 rounded-full bg-red-600 text-white text-[10px] font-bold align-middle"></span>
+                    Jumlah Pemesan
                 </button>
                 <button data-tab="images" class="px-5 py-2 rounded-full text-sm font-medium bg-nude-200 text-nude-800 hover:bg-nude-300 transition-all">Foto Website</button>
                 <button data-tab="testi" class="px-5 py-2 rounded-full text-sm font-medium bg-nude-200 text-nude-800 hover:bg-nude-300 transition-all">Foto Testimoni</button>
             </div>
 
-            <!-- BOOKING -->
+            <!-- JUMLAH PEMESAN -->
             <section id="tab-bookings">
-                <div class="flex flex-col sm:flex-row gap-3 sm:items-center justify-between mb-5">
-                    <div class="flex flex-wrap gap-2 items-center">
-                        <select id="bk-filter" class="px-4 py-2 rounded-full bg-white border border-nude-300 text-sm focus:outline-none focus:border-nude-700">
-                            <option value="all">Semua status</option>
-                            <option value="new">Baru</option>
-                            <option value="contacted">Sudah dihubungi</option>
-                            <option value="booked">Booked</option>
-                            <option value="done">Selesai</option>
-                            <option value="cancelled">Dibatalkan</option>
-                        </select>
-                        <input id="bk-search" type="search" placeholder="Cari nama / kontak..." class="px-4 py-2 rounded-full bg-white border border-nude-300 text-sm focus:outline-none focus:border-nude-700 w-56">
+                <div class="flex items-center justify-between mb-5">
+                    <p class="text-sm text-nude-600 font-light">Dihitung dari jumlah klik tombol <b>Pesan via WhatsApp</b> di website.</p>
+                    <button id="bk-refresh" class="px-4 py-2 rounded-full border border-nude-400 text-xs hover:bg-nude-100">Muat ulang</button>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-white rounded-2xl border border-nude-200 p-5 shadow-sm">
+                        <p class="text-xs uppercase tracking-wider text-nude-500">Total</p>
+                        <p id="st-total" class="font-serif text-4xl font-bold text-nude-900 mt-2">-</p>
                     </div>
-                    <div class="flex items-center gap-3">
-                        <span id="bk-count" class="text-xs text-nude-600"></span>
-                        <button id="bk-refresh" class="px-4 py-2 rounded-full border border-nude-400 text-xs hover:bg-nude-100">Muat ulang</button>
+                    <div class="bg-white rounded-2xl border border-nude-200 p-5 shadow-sm">
+                        <p class="text-xs uppercase tracking-wider text-nude-500">Hari ini</p>
+                        <p id="st-today" class="font-serif text-4xl font-bold text-nude-900 mt-2">-</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-nude-200 p-5 shadow-sm">
+                        <p class="text-xs uppercase tracking-wider text-nude-500">7 hari terakhir</p>
+                        <p id="st-week" class="font-serif text-4xl font-bold text-nude-900 mt-2">-</p>
+                    </div>
+                    <div class="bg-white rounded-2xl border border-nude-200 p-5 shadow-sm">
+                        <p class="text-xs uppercase tracking-wider text-nude-500">Bulan ini</p>
+                        <p id="st-month" class="font-serif text-4xl font-bold text-nude-900 mt-2">-</p>
                     </div>
                 </div>
-                <div id="bk-list" class="space-y-4"></div>
+
+                <div class="bg-white rounded-2xl border border-nude-200 p-6 shadow-sm">
+                    <h3 class="font-serif font-bold text-lg text-nude-900 mb-4">Berdasarkan layanan</h3>
+                    <div id="st-services" class="space-y-3"></div>
+                </div>
             </section>
 
             <!-- FOTO WEBSITE -->

@@ -162,7 +162,7 @@ async function showForSession(session) {
     $("login-view").classList.add("hidden");
     $("admin-view").classList.remove("hidden");
     $("admin-email").textContent = session.user.email;
-    loadBookings();
+    loadStats();
     loadSiteImages();
     loadTestimonials();
 }
@@ -220,7 +220,7 @@ document.querySelectorAll("[data-tab]").forEach(btn => btn.addEventListener("cli
     });
     ["bookings", "images", "testi"].forEach(t =>
         $("tab-" + t).classList.toggle("hidden", btn.dataset.tab !== t));
-    if (btn.dataset.tab === "bookings") loadBookings();
+    if (btn.dataset.tab === "bookings") loadStats();
 }));
 
 /* ---------- Foto website ---------- */
@@ -359,130 +359,60 @@ async function loadTestimonials() {
 }
 
 
-/* ---------- Booking ---------- */
-const STATUS = {
-    new:       { label: "Baru",            cls: "bg-red-100 text-red-800" },
-    contacted: { label: "Sudah dihubungi", cls: "bg-amber-100 text-amber-800" },
-    booked:    { label: "Booked",          cls: "bg-blue-100 text-blue-800" },
-    done:      { label: "Selesai",         cls: "bg-green-100 text-green-800" },
-    cancelled: { label: "Dibatalkan",      cls: "bg-nude-200 text-nude-700" }
-};
-let bookings = [];
+/* ---------- Jumlah pemesan ---------- */
+/* Satu baris di tabel `bookings` = satu klik "Pesan via WhatsApp" di website. */
+const SERVICES = [
+    "Wedding Make Up", "Engagement Make Up", "Prewedding Make Up",
+    "Party & Event Make Up", "Graduation Make Up", "Custom Makeup"
+];
 
-function waNumber(contact) {
-    // ambil nomor kalau kontak bukan email. 08xx -> 628xx
-    if (contact.includes("@")) return null;
-    let d = contact.replace(/[^0-9]/g, "");
-    if (d.length < 8) return null;
-    if (d.startsWith("0")) d = "62" + d.slice(1);
-    return d;
-}
-function fmtDate(iso) {
-    return new Date(iso).toLocaleString("id-ID", {
-        day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
-    });
-}
-
-async function loadBookings() {
+async function loadStats() {
     const { data, error } = await db.from("bookings")
-        .select("id, created_at, name, contact, service, message, status")
+        .select("created_at, service")
         .order("created_at", { ascending: false })
-        .limit(500);
+        .limit(5000);
     if (error) {
-        $("bk-list").replaceChildren(el("p", "text-sm text-red-700", "Gagal memuat booking: " + error.message));
+        toast("Gagal memuat data pemesan: " + error.message, false);
         return;
     }
-    bookings = data || [];
-    renderBookings();
-}
+    const rows = data || [];
 
-function renderBookings() {
-    const filter = $("bk-filter").value;
-    const q = $("bk-search").value.trim().toLowerCase();
-    const list = bookings.filter(b =>
-        (filter === "all" || b.status === filter) &&
-        (!q || b.name.toLowerCase().includes(q) || b.contact.toLowerCase().includes(q))
-    );
+    const now = new Date();
+    const startToday = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const startWeek = new Date(startToday); startWeek.setDate(startWeek.getDate() - 6);
+    const startMonth = new Date(now.getFullYear(), now.getMonth(), 1);
 
-    const newCount = bookings.filter(b => b.status === "new").length;
-    const badge = $("new-badge");
-    badge.textContent = newCount;
-    badge.classList.toggle("hidden", newCount === 0);
-    $("bk-count").textContent = list.length + " dari " + bookings.length + " pesanan";
-
-    const wrap = $("bk-list");
-    wrap.replaceChildren();
-    if (!list.length) {
-        wrap.appendChild(el("p", "text-sm text-nude-600 bg-white border border-nude-200 rounded-2xl p-6 text-center",
-            bookings.length ? "Tidak ada pesanan yang cocok." : "Belum ada pesanan masuk."));
-        return;
-    }
-
-    list.forEach(b => {
-        const card = el("div", "bg-white rounded-2xl border border-nude-200 p-5 shadow-sm");
-
-        const top = el("div", "flex flex-wrap items-start justify-between gap-3");
-        const who = el("div", "min-w-0");
-        who.appendChild(el("p", "font-semibold text-nude-900", b.name));
-        who.appendChild(el("p", "text-xs text-nude-600 mt-0.5", b.service + "  -  " + fmtDate(b.created_at)));
-        top.appendChild(who);
-
-        const st = STATUS[b.status] || STATUS.new;
-        top.appendChild(el("span", "text-[11px] font-semibold px-3 py-1 rounded-full " + st.cls, st.label));
-        card.appendChild(top);
-
-        const contactRow = el("p", "text-sm text-nude-800 mt-3");
-        contactRow.append(el("span", "text-nude-500 text-xs uppercase tracking-wider mr-2", "Kontak"), document.createTextNode(b.contact));
-        card.appendChild(contactRow);
-
-        if (b.message) {
-            const msg = el("p", "text-sm text-nude-700 font-light mt-3 bg-nude-50 border border-nude-200 rounded-xl p-3 whitespace-pre-wrap break-words", b.message);
-            card.appendChild(msg);
-        }
-
-        const actions = el("div", "flex flex-wrap items-center gap-2 mt-4");
-
-        const wa = waNumber(b.contact);
-        if (wa) {
-            const text = `Halo ${b.name}, terima kasih sudah menghubungi kami untuk ${b.service}. `;
-            const a = el("a", "px-4 py-2 rounded-full bg-green-600 hover:bg-green-700 text-white text-xs font-medium", "Chat WhatsApp");
-            a.href = "https://wa.me/" + wa + "?text=" + encodeURIComponent(text);
-            a.target = "_blank"; a.rel = "noopener";
-            actions.appendChild(a);
-        } else if (b.contact.includes("@")) {
-            const a = el("a", "px-4 py-2 rounded-full bg-nude-700 hover:bg-nude-800 text-white text-xs font-medium", "Kirim Email");
-            a.href = "mailto:" + encodeURIComponent(b.contact).replace(/%40/g, "@") +
-                "?subject=" + encodeURIComponent("Booking " + b.service);
-            actions.appendChild(a);
-        }
-
-        const sel = el("select", "px-3 py-2 rounded-full bg-white border border-nude-300 text-xs focus:outline-none focus:border-nude-700");
-        Object.entries(STATUS).forEach(([val, s]) => {
-            const o = el("option", null, s.label);
-            o.value = val;
-            if (val === b.status) o.selected = true;
-            sel.appendChild(o);
-        });
-        sel.onchange = async () => {
-            sel.disabled = true;
-            const { error } = await db.from("bookings").update({ status: sel.value }).eq("id", b.id);
-            if (error) {
-                toast("Gagal ubah status: " + error.message, false);
-                sel.value = b.status;
-                sel.disabled = false;
-                return;
-            }
-            b.status = sel.value;
-            toast("Status diperbarui");
-            renderBookings();
-        };
-        actions.appendChild(sel);
-
-        card.appendChild(actions);
-        wrap.appendChild(card);
+    let today = 0, week = 0, month = 0;
+    const perService = Object.fromEntries(SERVICES.map(s => [s, 0]));
+    rows.forEach(r => {
+        const d = new Date(r.created_at);
+        if (d >= startToday) today++;
+        if (d >= startWeek) week++;
+        if (d >= startMonth) month++;
+        perService[r.service] = (perService[r.service] || 0) + 1;
     });
+
+    $("st-total").textContent = rows.length;
+    $("st-today").textContent = today;
+    $("st-week").textContent = week;
+    $("st-month").textContent = month;
+
+    const wrap = $("st-services");
+    wrap.replaceChildren();
+    const max = Math.max(1, ...Object.values(perService));
+    Object.entries(perService)
+        .sort((a, b) => b[1] - a[1])
+        .forEach(([name, n]) => {
+            const row = el("div");
+            const head = el("div", "flex justify-between text-sm mb-1");
+            head.append(el("span", "text-nude-800", name), el("span", "font-semibold text-nude-900", String(n)));
+            const track = el("div", "h-2 rounded-full bg-nude-100 overflow-hidden");
+            const bar = el("div", "h-full rounded-full bg-nude-700");
+            bar.style.width = (n / max * 100) + "%";
+            track.appendChild(bar);
+            row.append(head, track);
+            wrap.appendChild(row);
+        });
 }
 
-$("bk-filter").addEventListener("change", renderBookings);
-$("bk-search").addEventListener("input", renderBookings);
-$("bk-refresh").addEventListener("click", loadBookings);
+$("bk-refresh").addEventListener("click", loadStats);
