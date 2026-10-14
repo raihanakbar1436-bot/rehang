@@ -1,23 +1,7 @@
 /*
-  X-Content-Type-Options: nosniff
   X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
-  Permissions-Policy: camera=(), microphone=(), geolocation=()
 
-/*.css
-  Cache-Control: public, max-age=3600
-/*.js
-  Cache-Control: public, max-age=3600
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 4ceb6f08dacc14f00fab1f07dcd938f2d164e1a0
-
-/admin.html
-  X-Robots-Tag: noindex, nofollow
-  Cache-Control: no-store
-<<<<<<< HEAD
-=======
->>>>>>> 0648a9231b93078899ff3eb80ab0d25f9da84b37
-=======
->>>>>>> 4ceb6f08dacc14f00fab1f07dcd938f2d164e1a0
+/assets/*
+  Cache-Control: public, max-age=31536000
