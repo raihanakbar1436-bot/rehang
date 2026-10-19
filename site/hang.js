@@ -186,13 +186,17 @@ function closeModal() { modal.classList.add("hidden"); }
 modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
 
-/* ---------- Form booking -> Supabase ---------- */
+/* ---------- Form booking -> WhatsApp ---------- */
+/* Client HANYA memesan lewat WhatsApp. Saat tombol diklik:
+   1) catat 1 baris ke tabel `bookings` (supaya admin bisa lihat jumlah pemesan)
+   2) buka WhatsApp dengan pesan otomatis.
+   Kalau pencatatan gagal, WhatsApp tetap dibuka (pesanan tidak boleh hilang). */
 const form = document.getElementById("booking-form");
 const submitBtn = document.getElementById("submit-btn");
 const submitLabel = document.getElementById("submit-label");
 const formError = document.getElementById("form-error");
-
-const COOLDOWN_MS = 30_000; // batasi kirim ulang dari browser yang sama
+const COOLDOWN_MS = 30_000; // batasi pencatatan ganda dari browser yang sama
+const LOG_TIMEOUT_MS = 1500; // jangan biarkan client menunggu lama sebelum WA terbuka
 let lastSubmit = 0;
 
 function setError(msg) {
@@ -202,11 +206,15 @@ function setError(msg) {
 }
 function setLoading(loading) {
     submitBtn.disabled = loading;
-    submitLabel.textContent = loading ? "Mengirim..." : "Kirim Pesan";
+    submitLabel.textContent = loading ? "Membuka WhatsApp..." : "Pesan via WhatsApp";
 }
 function whatsappLink(payload) {
-    const text = `Halo, saya ${payload.name}. Saya ingin booking ${payload.service}.\n${payload.message || ""}\nKontak: ${payload.contact}`;
-    return `https://wa.me/${CFG.WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+    const lines = [
+        `Halo, saya ${payload.name}.`,
+        `Saya ingin booking ${payload.service}.`
+    ];
+    if (payload.message) lines.push(`Detail: ${payload.message}`);
+    return `https://wa.me/${CFG.WHATSAPP_NUMBER}?text=${encodeURIComponent(lines.join("\n"))}`;
 }
 
 async function handleFormSubmit(e) {
@@ -219,9 +227,13 @@ async function handleFormSubmit(e) {
     if (document.getElementById("f-website").value) {
     if (document.getElementById("f-hp").value) {
         console.warn("[MUA] Honeypot terisi - pesan tidak dikirim.");
+    // honeypot: bot mengisi, manusia tidak. Diam-diam abaikan.
+    if (document.getElementById("f-hp").value) {
+        console.warn("[MUA] Honeypot terisi - diabaikan.");
         form.reset();
         showModal({ title: "Pesan Terkirim!", message: "Terima kasih telah menghubungi kami." });
         return;
+    }
     }
 }
     }
@@ -229,52 +241,40 @@ async function handleFormSubmit(e) {
 
     const payload = {
         name: document.getElementById("f-name").value.trim(),
-        contact: document.getElementById("f-contact").value.trim(),
+        contact: "WhatsApp", // kontak asli ada di chat WA; kolom ini wajib diisi oleh schema
         service: document.getElementById("f-service").value,
         message: document.getElementById("f-message").value.trim() || null
     };
 
     if (payload.name.length < 2) return setError("Nama minimal 2 karakter.");
-    if (payload.contact.length < 5) return setError("Isi email atau nomor WhatsApp yang valid.");
+    if (!CFG.WHATSAPP_NUMBER) return setError("Nomor WhatsApp belum diisi di config.js.");
 
-    const isEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.contact);
-    const isPhone = /^\+?[0-9\s\-]{8,16}$/.test(payload.contact);
-    if (!isEmail && !isPhone) return setError("Format kontak tidak valid. Gunakan email atau nomor telepon.");
-
-    if (Date.now() - lastSubmit < COOLDOWN_MS) {
-        return setError("Mohon tunggu beberapa detik sebelum mengirim lagi.");
-    }
-
-    if (!db) {
-        // Supabase belum diisi -> arahkan ke WhatsApp supaya booking tidak hilang
-        showModal({
-            title: "Lanjut via WhatsApp",
-            message: "Form belum terhubung ke database. Kamu akan diarahkan ke WhatsApp.",
-            ok: false
-        });
-        window.open(whatsappLink(payload), "_blank", "noopener");
-        return;
-    }
+    // Buka tab WA SEKARANG (masih di dalam aksi klik) supaya tidak diblokir popup blocker,
+    // alamatnya diisi setelah pencatatan selesai.
+    const waWindow = window.open("", "_blank");
+    if (waWindow) waWindow.opener = null;
 
     setLoading(true);
     try {
-        const { error } = await db.from("bookings").insert(payload); // tanpa .select(): anon tidak boleh SELECT
-        if (error) throw error;
-
-        lastSubmit = Date.now();
+        // Catat hanya kalau bukan klik ulang beruntun dari browser yang sama
+        if (db && Date.now() - lastSubmit >= COOLDOWN_MS) {
+            lastSubmit = Date.now();
+            const insert = db.from("bookings").insert(payload) // tanpa .select(): anon tidak boleh SELECT
+                .then(({ error }) => { if (error) console.warn("[MUA] Gagal mencatat booking:", error.message); })
+                .catch(err => console.warn("[MUA] Gagal mencatat booking:", err));
+            await Promise.race([insert, new Promise(res => setTimeout(res, LOG_TIMEOUT_MS))]);
+        }
+    } finally {
+        const url = whatsappLink(payload);
+        if (waWindow) {
+            waWindow.location.href = url;
+        } else {
+            window.location.href = url; // popup diblokir -> pindah di tab yang sama
+        }
+        setLoading(false);
         form.reset();
         showModal({
-            title: "Pesan Terkirim!",
-            message: "Terima kasih telah menghubungi kami. Kami akan segera merespons pesanmu."
+            title: "Lanjutkan di WhatsApp",
+            message: "Pesan sudah disiapkan. Jika WhatsApp belum terbuka, ulangi klik tombolnya."
         });
-    } catch (err) {
-        console.error("[MUA] Gagal kirim booking:", err);
-        showModal({
-            title: "Gagal Mengirim",
-            message: "Terjadi kendala saat mengirim. Silakan coba lagi, atau hubungi kami langsung via WhatsApp.",
-            ok: false
-        });
-        setError("Pesan belum terkirim. Coba lagi atau klik tombol WhatsApp di samping.");
-    } finally {
-        setLoading(false);
     }
